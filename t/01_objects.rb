@@ -9,11 +9,13 @@ ARGV.each { |i|
 p store
 p test
 
+r = []
 shinglers = Digest::Shingle::Archive.new()
 store.each { |file|
     puts "sketching #{file}"
     text = File.new(file).readlines.join("\n").downcase
-    shinglers.add(text, file)
+    s = shinglers.add(text, file)
+    r.push s
 }
 
 test.each { |file|
@@ -21,5 +23,7 @@ test.each { |file|
     text = File.new(file).readlines.join("\n").downcase
     s = Digest::Shingle.new(text)
     p shinglers.match(s, 0.90)
+	r.each { |q|
+		q.match(s)
+	}
 }
-

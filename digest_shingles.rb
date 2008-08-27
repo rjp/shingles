@@ -76,6 +76,7 @@ class Shingle
         def add(text, *extra)
             s = Digest::Shingle.new(text)
             self.add_shingle(s, extra)
+	    return s
         end
 
         def add_shingle(shingle, *extra)
