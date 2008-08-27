@@ -22,7 +22,6 @@ class Shingle
 		    shingle = words[0..3]
 	        sha1 = Digest::SHA1.hexdigest(shingle.join(''))
 		    shingles.add([shingle, sha1])
-#by_file[file] = by_file[file] + 1
 		    junk = words.shift
 		end
 	
