@@ -64,6 +64,15 @@ class Shingle
         end
 
         def match(shingle, target=0.75)
+		found = self.matches(shingle, target)
+		if found.size > 0 then
+			return true
+		else
+			return false
+		end
+	end
+
+        def matches(shingle, target=0.75)
             results = []
             common = Hash.new { |h,k| h[k] = 0}
             shingle.shingles.each { |sh, hsh|
