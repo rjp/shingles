@@ -88,7 +88,7 @@ class Shingle
                     results.push k
                 end
             }
-            return results
+            return results.map {|i| @oid_to_object[i]}
         end
     end
 end
