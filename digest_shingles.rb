@@ -33,6 +33,30 @@ class Shingle
 	
         return u, fA
 	end
+
+	def match(something)
+		if something.respond_to? :shingles then
+			myshingle = something
+		else
+			myshingle = Digest::Shingle.new(something.to_s)
+		end
+
+		myhashes = {}
+		self.shingles.each { |sh, hsh|
+			myhashes[hsh] = 1
+		}
+
+            	common = 0
+
+		# TODO make this work on both directions at the same time?
+		myshingle.shingles.each { |sh, hsh|
+	            unless myhashes[hsh].nil? then
+		    	common = common + 1
+	            end
+	    	}
+		puts "ratio = #{common.to_f/self.shingles.size}"
+	end
+
 	
 	def initialize(text)
         @original = text
