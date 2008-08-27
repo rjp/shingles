@@ -5,6 +5,10 @@ module Digest
 class Shingle
     attr_accessor :sketch, :shingles, :original
 
+	def text
+		return @original
+	end
+
 	def minW(a, s)
 	    return a.sort_by{|x| x[1]}[0..s-1]
 	end
