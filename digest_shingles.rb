@@ -75,7 +75,18 @@ class Shingle
         def add(text, *extra)
             s = Digest::Shingle.new(text)
             self.add_shingle(s, extra)
-	    return s
+	        return s
+        end
+
+        def add_file(filename, extra=filename)
+            text = File.new(filename).readlines.join("\n").downcase
+            return self.add(text, extra)
+        end
+
+        def match_file(filename)
+            text = File.new(filename).readlines.join("\n").downcase
+            s = Digest::Shingle.new(text)
+            return self.match(s, 0.90)
         end
 
         def add_shingle(shingle, *extra)
