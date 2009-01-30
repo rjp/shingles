@@ -1,10 +1,11 @@
-=== Digest::Shingle ===
+Digest::Shingle
+===============
 
 Implementation of shingles for approximately matching blocks of text
 
-== Example ==
+Example
+-------
 
-{{{
     a = Digest::Shingle::Archive.new()
     a.add('some text')
     a.add_file('somefilename.txt')
@@ -13,5 +14,3 @@ Implementation of shingles for approximately matching blocks of text
     if a.match(s) then # any of the shingles match?
         ...
     end
-}}}
-
