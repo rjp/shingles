@@ -99,8 +99,14 @@ class Shingle
             @oid_to_object[shingle.object_id] = shingle
         end
 
-        def match(shingle, target=0.75)
-		found = self.matches(shingle, target)
+        def match(something, target=0.75)
+		if something.respond_to? :shingles then
+            myshingle = something
+        else
+            myshingle = Digest::Shingle.new(something.to_s)
+        end
+
+		found = self.matches(myshingle, target)
 		if found.size > 0 then
 			return true
 		else
@@ -108,10 +114,15 @@ class Shingle
 		end
 	end
 
-        def matches(shingle, target=0.75)
+        def matches(something, target=0.75)
+            if something.respond_to? :shingles then
+                myshingle = something
+            else
+                myshingle = Digest::Shingle.new(something.to_s)
+            end
             results = []
             common = Hash.new { |h,k| h[k] = 0}
-            shingle.shingles.each { |sh, hsh|
+            myshingle.shingles.each { |sh, hsh|
 	            unless @stored_hashes[hsh].nil? then
 	                @stored_hashes[hsh].each { |f|
 	                    common[f] = common[f] + 1
