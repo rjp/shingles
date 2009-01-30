@@ -3,7 +3,7 @@ require 'digest/sha1'
 
 module Digest
 class Shingle
-    attr_accessor :sketch, :shingles, :original
+    attr_accessor :sketch, :shingles, :original, :name
 
 	def text
 		return @original
@@ -57,8 +57,9 @@ class Shingle
 	end
 
 	
-	def initialize(text)
+	def initialize(text, extra='noname')
         @original = text
+        @name = extra || Digest::SHA1.hexdigest(text)
         @shingles, @sketch = make_sketch(text)
 	end
 
@@ -72,8 +73,8 @@ class Shingle
             @oid_to_object = {}
         end
 
-        def add(text, *extra)
-            s = Digest::Shingle.new(text)
+        def add(text, extra)
+            s = Digest::Shingle.new(text, extra)
             self.add_shingle(s, extra)
 	        return s
         end
