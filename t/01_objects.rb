@@ -27,13 +27,13 @@ class Test_Shingles < Test::Unit::TestCase
         a = Digest::Shingle::Archive.new()
         # TODO find these files automatically
         a.add_file('t/f1')
-        a.add_file('t/f2')
         a.add_file('t/f3')
-        a.add_file('t/f4')
 
-        t = File.new('t/f5').readlines.join("\n").downcase
-        r = a.matches(t, 0.75)
-        p r
+        t = File.new('t/f1').readlines.join("\n").downcase
+        r = a.matches(t, 0.5)
+        assert(r.size > 0, 'must have at least one match')
+        names = r.map{|o|o.name}
+        assert(r.find('t/f1'), 'found t/f1')
     end
 
 
