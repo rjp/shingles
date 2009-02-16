@@ -67,7 +67,7 @@ class Shingle
     class Archive
         attr_accessor :storage, :all_counts
 
-        def initialize()
+        def initialize(persist=nil)
             @storage = []
             @stored_hashes = Hash.new {|h,k| h[k]=[]}
             @all_counts = {}
