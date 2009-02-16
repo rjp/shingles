@@ -1,5 +1,6 @@
 require 'set'
 require 'digest/sha1'
+require 'yaml'
 
 module Digest
 class Shingle
@@ -71,6 +72,10 @@ class Shingle
             @stored_hashes = Hash.new {|h,k| h[k]=[]}
             @all_counts = {}
             @oid_to_object = {}
+        end
+
+        def dump()
+            YAML.dump([@storage, @stored_hashes, @all_counts, @oid_to_object])
         end
 
         def add(text, extra)
