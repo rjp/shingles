@@ -58,7 +58,7 @@ class Shingle
 	end
 
 	
-	def initialize(text, extra='noname')
+	def initialize(text, extra=nil)
         @original = text
         @name = extra || Digest::SHA1.hexdigest(text)
         @shingles, @sketch = make_sketch(text)
@@ -78,7 +78,7 @@ class Shingle
             YAML.dump([@storage, @stored_hashes, @all_counts, @oid_to_object])
         end
 
-        def add(text, extra)
+        def add(text, extra=nil)
             s = Digest::Shingle.new(text, extra)
             self.add_shingle(s, extra)
 	        return s
